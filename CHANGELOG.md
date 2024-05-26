@@ -15,7 +15,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 ## Added
 
 * CI/CD Pipelines added. by [@hasansezertasan](https://github.com/hasansezertasan) in [#1](https://github.com/hasansezertasan/asgi-user-agents/pull/1)
-* Update branch names. by [@hasansezertasan](https://github.com/hasansezertasan) in [#2](https://github.com/hasansezertasan/asgi-user-agents/pull/2)
+* Update branch names on CI/CD Pipelines. by [@hasansezertasan](https://github.com/hasansezertasan) in [#2](https://github.com/hasansezertasan/asgi-user-agents/pull/2)
 * Add `Scope`, `Message`, `Receive`, `Send`, and `ASGIApp` types from `starlette.types` for type hinting. by [@hasansezertasan](https://github.com/hasansezertasan) in [#3](https://github.com/hasansezertasan/asgi-user-agents/pull/3)
 * Add `UADetails` data structure that provides information about the user agent extracted from the request headers. by [@hasansezertasan](https://github.com/hasansezertasan) in [#4](https://github.com/hasansezertasan/asgi-user-agents/pull/4)
 * Add `UARequest` that facilitates type hinting `request.scope["ua"]` in Starlette-based frameworks. by [@hasansezertasan](https://github.com/hasansezertasan) in [#5](https://github.com/hasansezertasan/asgi-user-agents/pull/5)
