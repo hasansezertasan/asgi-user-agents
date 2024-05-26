@@ -1,0 +1,19 @@
+name: Test suite
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Install Hatch
+        uses: pypa/hatch@install
+      - name: Check Types
+        run: hatch run types:all
+      - name: Run Tests
+        run: hatch test -a
