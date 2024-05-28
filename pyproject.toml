@@ -77,18 +77,15 @@ all = ["spelling", "typing", "style", "format"]
 
 [tool.hatch.envs.hatch-test]
 extra-dependencies = [
-  "parametrize_from_file==0.20.0",
   "pytest>=6.0.0",
   "pytest-asyncio>=0.14.0",
-  "pytest-cov>=2.0.0",
+  "parametrize_from_file==0.20.0",
+  "httpx>=0.23.3, <0.27.0",
   "starlette>=0.16.0",
   "fastapi>=0.63.0, <0.110.0",
   "litestar>=2.0.0, <3.0.0",
   "quart>=0.10.0, <0.20.0",
-  "httpx>=0.23.3, <0.27.0",
 ]
-[[tool.hatch.envs.hatch-test.matrix]]
-python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
 
 
 [tool.ruff]
