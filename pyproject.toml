@@ -9,7 +9,7 @@ description = "User Agent integration for ASGI applications."
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
-keywords = ["asgi", "starlette", "litestar", "fastapi", "quart"]
+keywords = ["asgi", "starlette", "litestar", "fastapi", "quart", "user-agent"]
 authors = [{ name = "Hasan Sezer Taşan", email = "hasansezertasan@gmail.com" }]
 maintainers = [
   { name = "Hasan Sezer Taşan", email = "hasansezertasan@gmail.com" },
