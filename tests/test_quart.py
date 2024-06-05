@@ -1,3 +1,5 @@
+"""Test usage of the middleware in Quart."""
+
 from typing import cast
 
 import httpx
@@ -12,6 +14,7 @@ app = Quart(__name__)
 
 @app.route("/")
 async def home() -> str:
+    """Return user-agent data."""
     ua = UADetails(cast(dict, request.scope))
     data = {
         "ua_string": ua.ua_string,
@@ -38,9 +41,10 @@ async def home() -> str:
     return jsonify(data)
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 @pff.parametrize(path="assets/test_middleware.json")
 async def test_user_agent_data(ua_string: str, response_data: dict) -> None:
+    """Test user-agent data."""
     async with httpx.AsyncClient(app=app) as client:
         response = await client.get(
             "http://testserver/", headers={"User-Agent": ua_string}

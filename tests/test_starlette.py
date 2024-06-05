@@ -1,3 +1,5 @@
+"""Test usage of the middleware in Starlette."""
+
 import httpx
 import parametrize_from_file as pff
 import pytest
@@ -11,6 +13,7 @@ from asgi_user_agents import UARequest as Request
 
 
 async def index(request: Request) -> Response:
+    """Return user-agent data."""
     ua = request.scope["ua"]
     assert isinstance(ua, UADetails)
     data = {
@@ -41,9 +44,10 @@ async def index(request: Request) -> Response:
 app = Starlette(routes=[Route("/", index)], middleware=[Middleware(UAMiddleware)])
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 @pff.parametrize(path="assets/test_middleware.json")
 async def test_user_agent_data(ua_string: str, response_data: dict) -> None:
+    """Test user-agent data."""
     async with httpx.AsyncClient(app=app) as client:
         response = await client.get(
             "http://testserver/", headers={"User-Agent": ua_string}
