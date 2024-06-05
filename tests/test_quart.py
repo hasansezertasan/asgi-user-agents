@@ -1,4 +1,5 @@
 """Test usage of the middleware in Quart."""
+
 from typing import cast
 
 import httpx

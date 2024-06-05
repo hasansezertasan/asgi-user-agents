@@ -1,4 +1,5 @@
 """Request classes with `scope` attribute of type `UAScope` for type-checking."""
+
 from typing import Any, Literal, Protocol, overload
 
 from asgi_user_agents.datastructures import UADetails

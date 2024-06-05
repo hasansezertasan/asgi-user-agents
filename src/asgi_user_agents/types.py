@@ -1,4 +1,5 @@
 """Types for ASGI apps."""
+
 # Ripped from `starlette.types`.
 import typing
 

@@ -1,4 +1,5 @@
 """ASGI User Agents package initialization."""
+
 from contextlib import suppress
 
 from .datastructures import UADetails as UADetails

@@ -1,4 +1,5 @@
 """Test usage of the middleware in FastAPI."""
+
 import httpx
 import parametrize_from_file as pff
 import pytest

@@ -1,4 +1,5 @@
 """Test usage of the middleware in Starlette."""
+
 import httpx
 import parametrize_from_file as pff
 import pytest
