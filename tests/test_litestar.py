@@ -1,3 +1,6 @@
+"""Test usage of the middleware in Litestar."""
+from __future__ import annotations
+
 from typing import Any, Dict
 
 import httpx
@@ -11,6 +14,7 @@ from asgi_user_agents import UARequest as Request
 
 @get("/")
 async def index(request: Request) -> Dict[str, Any]:
+    """Return user-agent data."""
     ua = request.scope["ua"]
     assert isinstance(ua, UADetails)
     return {
@@ -40,9 +44,10 @@ async def index(request: Request) -> Dict[str, Any]:
 app = Litestar(route_handlers=[index], middleware=[UAMiddleware])
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 @pff.parametrize(path="assets/test_middleware.json")
 async def test_user_agent_data(ua_string: str, response_data: dict) -> None:
+    """Test user-agent data."""
     async with httpx.AsyncClient(app=app) as client:
         response = await client.get(
             "http://testserver/", headers={"User-Agent": ua_string}
