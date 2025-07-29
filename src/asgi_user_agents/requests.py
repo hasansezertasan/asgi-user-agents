@@ -3,7 +3,7 @@
 from typing import Any, Literal, Protocol, overload
 
 from asgi_user_agents.datastructures import UADetails
-from asgi_user_agents.types import Scope
+from asgi_user_agents._types import Scope
 
 try:
     from starlette.requests import Request
