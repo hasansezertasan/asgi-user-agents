@@ -44,7 +44,7 @@ async def index(request: Request) -> Response:
 app = Starlette(routes=[Route("/", index)], middleware=[Middleware(UAMiddleware)])
 
 
-@pytest.mark.asyncio
+@pytest.mark.asyncio()
 @pff.parametrize(path="assets/test_middleware.json")
 async def test_user_agent_data(ua_string: str, response_data: dict) -> None:
     """Test user-agent data."""
