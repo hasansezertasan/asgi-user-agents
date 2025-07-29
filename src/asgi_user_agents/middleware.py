@@ -1,7 +1,7 @@
 """Middleware for ASGI applications."""
 
+from asgi_user_agents._types import ASGIApp, Receive, Scope, Send
 from asgi_user_agents.datastructures import UADetails
-from asgi_user_agents.types import ASGIApp, Receive, Scope, Send
 
 
 class UAMiddleware:

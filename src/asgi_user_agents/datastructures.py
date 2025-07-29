@@ -8,7 +8,7 @@ from urllib.parse import unquote
 from user_agents.parsers import Browser, Device, OperatingSystem, UserAgent
 
 if TYPE_CHECKING:
-    from asgi_user_agents.types import Scope
+    from asgi_user_agents._types import Scope
 
 
 class UADetails:
@@ -20,7 +20,14 @@ class UADetails:
         self._ua: UserAgent
 
     def _get_header(self, name: bytes) -> Optional[str]:
-        """Get header value."""
+        """Get header value.
+
+        Args:
+            name: The name of the header to get.
+
+        Returns:
+            The value of the header, or None if the header is not found.
+        """
         return _get_header(self._scope, name)
 
     @property
