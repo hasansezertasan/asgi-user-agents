@@ -64,7 +64,7 @@ pre = "pre-commit run --all-files --hook-stage manual --show-diff-on-failure"
 
 
 [tool.hatch.envs.types]
-extra-dependencies = ["mypy>=1.0.0", "ruff==0.4.7", "codespell==2.3.0"]
+extra-dependencies = ["mypy>=1.0.0", "ruff==0.4.7", "codespell==2.4.1"]
 [[tool.hatch.envs.types.matrix]]
 python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
 [tool.hatch.envs.types.scripts]
@@ -82,7 +82,7 @@ extra-dependencies = [
   "parametrize_from_file==0.20.0",
   "httpx>=0.28.1, <0.29.0",
   "starlette>=0.16.0",
-  "fastapi>=0.63.0, <0.110.0",
+  "fastapi>=0.116.1, <0.117.0",
   "litestar>=2.0.0, <3.0.0",
   "quart>=0.10.0, <0.20.0",
 ]
