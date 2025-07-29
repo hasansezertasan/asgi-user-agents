@@ -80,7 +80,7 @@ extra-dependencies = [
   "pytest>=6.0.0",
   "pytest-asyncio>=0.14.0",
   "parametrize_from_file==0.20.0",
-  "httpx>=0.23.3, <0.27.0",
+  "httpx>=0.28.1, <0.29.0",
   "starlette>=0.16.0",
   "fastapi>=0.116.1, <0.117.0",
   "litestar>=2.0.0, <3.0.0",
