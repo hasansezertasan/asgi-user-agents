@@ -2,9 +2,9 @@
 
 from typing import cast
 
-import httpx
 import parametrize_from_file as pff
 import pytest
+from httpx import ASGITransport, AsyncClient
 from quart import Quart, jsonify, request
 
 from asgi_user_agents import UADetails
@@ -15,7 +15,7 @@ app = Quart(__name__)
 @app.route("/")
 async def home() -> str:
     """Return user-agent data."""
-    ua = UADetails(cast(dict, request.scope))
+    ua = UADetails(cast("dict", request.scope))
     data = {
         "ua_string": ua.ua_string,
         "os": ua.os,
@@ -45,10 +45,10 @@ async def home() -> str:
 @pff.parametrize(path="assets/test_middleware.json")
 async def test_user_agent_data(ua_string: str, response_data: dict) -> None:
     """Test user-agent data."""
-    async with httpx.AsyncClient(app=app) as client:
-        response = await client.get(
-            "http://testserver/", headers={"User-Agent": ua_string}
-        )
+    async with AsyncClient(
+        transport=ASGITransport(app), base_url="http://testserver"
+    ) as client:
+        response = await client.get("/", headers={"User-Agent": ua_string})
         data = response.json()
         assert data["ua_string"] == response_data["ua_string"]
         assert data["os"] == response_data["os"]
