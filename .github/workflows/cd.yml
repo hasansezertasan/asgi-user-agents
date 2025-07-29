@@ -15,11 +15,27 @@ jobs:
       name: release
       url: https://pypi.org/project/asgi-user-agents/${{ github.ref_name }}
     steps:
-      - name: Check out repository
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Install Hatch
-        uses: pypa/hatch@install
-      - name: Build
-        run: hatch build --clean
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: '.python-version'
+      - name: Setup uv
+        id: setup-uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Restore cache
+        if: steps.setup-uv.outputs.cache-hit == 'true'
+        run: echo "Cache was restored"
+      - name: Build the Package
+        run: uv build --no-sources --quiet
       - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@v1.12.4
+        run: uv publish --quite --trusted-publishing always
+      - name: Attach Release Artifacts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload ${{ github.ref_name }} ./dist/*
