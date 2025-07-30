@@ -57,7 +57,15 @@ build-backend = "hatchling.build"
 path = "src/asgi_user_agents/__about__.py"
 
 
+[tool.uv]
+cache-keys = [
+  { file = "pyproject.toml" },
+  { git = { commit = true, tags = true } },
+]
+
+
 [tool.hatch.envs.default]
+installer = "uv"
 extra-dependencies = [
   "starlette>=0.16.0",
   "uvicorn>=0.20.0,<0.29.0",
