@@ -229,7 +229,7 @@ git commit -m "$MESSAGE"
 Create a pull request and wait for the review 🤓.
 
 ```sh
-gh pr create --fill-first --web
+gh pr new -B main
 ```
 
 ## Author
