@@ -27,6 +27,7 @@ class UADetails:
 
         Returns:
             The value of the header, or None if the header is not found.
+
         """
         return _get_header(self._scope, name)
 

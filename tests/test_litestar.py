@@ -15,7 +15,15 @@ from asgi_user_agents import UARequest as Request
 
 @get("/")
 async def index(request: Request) -> Dict[str, Any]:
-    """Return user-agent data."""
+    """Return user-agent data.
+
+    Args:
+        request: The request object.
+
+    Returns:
+        The response object.
+
+    """
     ua = request.scope["ua"]
     assert isinstance(ua, UADetails)
     return {
