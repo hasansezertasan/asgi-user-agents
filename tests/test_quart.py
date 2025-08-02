@@ -14,7 +14,12 @@ app = Quart(__name__)
 
 @app.route("/")
 async def home() -> str:
-    """Return user-agent data."""
+    """Return user-agent data.
+
+    Returns:
+        The response object.
+
+    """
     ua = UADetails(cast("dict", request.scope))
     data = {
         "ua_string": ua.ua_string,

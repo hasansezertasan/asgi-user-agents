@@ -17,20 +17,28 @@
 
 ## Table of Contents
 
-- [asgi-user-agents](#asgi-user-agents)
-  - [Table of Contents](#table-of-contents)
-  - [Installation](#installation)
-  - [How does it work?](#how-does-it-work)
-  - [Usage](#usage)
-  - [API Reference](#api-reference)
-    - [`UAMiddleware`](#uamiddleware)
-    - [`UADetails`](#uadetails)
-    - [`UARequest`](#uarequest)
-  - [Development](#development)
-  - [Author](#author)
-  - [Credits](#credits)
-  - [Analysis](#analysis)
-  - [License](#license)
+<!-- toc -->
+
+- [Installation](#installation)
+- [How does it work?](#how-does-it-work)
+- [Usage](#usage)
+- [API Reference](#api-reference)
+  - [`UAMiddleware`](#uamiddleware)
+  - [`UADetails`](#uadetails)
+  - [`UARequest`](#uarequest)
+- [Development](#development)
+  - [`env`](#env)
+  - [`hooks`](#hooks)
+  - [`test`](#test)
+  - [`types`](#types)
+  - [`co`](#co)
+  - [`pr`](#pr)
+- [Author](#author)
+- [Credits](#credits)
+- [Analysis](#analysis)
+- [License](#license)
+
+<!-- tocstop -->
 
 ## Installation
 
@@ -147,6 +155,7 @@ async def home(request: Request):
     reveal_type(request.scope["ua"])  # Revealed type is 'UADetails'
 ```
 
+<!-- xc-heading -->
 ## Development
 
 Clone the repository and cd into the project directory:
@@ -156,11 +165,23 @@ git clone https://github.com/hasansezertasan/asgi-user-agents
 cd asgi-user-agents
 ```
 
-Install hatch, you can follow the instructions [here](https://hatch.pypa.io/latest/install/), or simply run the following command:
+Install hatch, you can follow the [instructions](https://hatch.pypa.io/latest/install/), or simply run one of the following commands:
+
+```bash
+mise use hatch
+```
+
+```sh
+uv tool install hatch
+```
 
 ```bash
 pipx install hatch
 ```
+
+The commands below can also be executed using the [xc task runner](https://xcfile.dev/), which combines the usage instructions with the actual commands. Simply run `xc`, it will popup an interactive menu with all available tasks.
+
+### `env`
 
 Initialize the environment and install the dependencies:
 
@@ -168,11 +189,15 @@ Initialize the environment and install the dependencies:
 hatch shell
 ```
 
+### `hooks`
+
 Initialize pre-commit hooks by running the following command:
 
 ```bash
 pre-commit install
 ```
+
+### `test`
 
 Make your changes on a new branch and run the tests:
 
@@ -180,26 +205,32 @@ Make your changes on a new branch and run the tests:
 hatch test -a
 ```
 
+### `types`
+
 Make sure that the code is typed, linted, and formatted correctly:
 
 ```bash
 hatch run types:all
 ```
 
+### `co`
+
 Stage your changes and commit them:
+
+Inputs: MESSAGE
 
 ```bash
 git add .
-git commit -m "Your message"
+git commit -m "$MESSAGE"
 ```
 
-Push your changes to the repository:
-
-```bash
-git push
-```
+### `pr`
 
 Create a pull request and wait for the review 🤓.
+
+```sh
+gh pr new -B main
+```
 
 ## Author
 
