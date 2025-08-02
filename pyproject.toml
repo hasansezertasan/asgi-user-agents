@@ -62,6 +62,7 @@ cache-keys = [
   { file = "pyproject.toml" },
   { git = { commit = true, tags = true } },
 ]
+trusted-publishing = "always"
 
 
 [tool.hatch.envs.default]
