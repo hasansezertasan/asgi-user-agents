@@ -46,7 +46,7 @@ async def home() -> str:
     return jsonify(data)
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 @pff.parametrize(path="assets/test_middleware.json")
 async def test_user_agent_data(ua_string: str, response_data: dict) -> None:
     """Test user-agent data."""
