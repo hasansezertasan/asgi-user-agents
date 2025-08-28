@@ -80,7 +80,7 @@ pre = "pre-commit run --all-files --hook-stage manual --show-diff-on-failure"
 
 
 [tool.hatch.envs.types]
-extra-dependencies = ["mypy>=1.0.0", "ruff==0.12.10", "codespell==2.4.1"]
+extra-dependencies = ["mypy>=1.0.0", "ruff==0.12.11", "codespell==2.4.1"]
 
 
 [[tool.hatch.envs.types.matrix]]
