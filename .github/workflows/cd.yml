@@ -16,7 +16,7 @@ jobs:
       url: https://pypi.org/project/asgi-user-agents/${{ github.ref_name }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Set up Python
