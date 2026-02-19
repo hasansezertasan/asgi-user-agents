@@ -70,7 +70,7 @@ installer = "uv"
 extra-dependencies = [
   "starlette>=0.16.0",
   "uvicorn>=0.35.0,<0.36.0",
-  "pre-commit>=3.0.0,<4.0.0",
+  "pre-commit>=4.5.1,<4.6.0",
 ]
 
 
