@@ -81,3 +81,28 @@ async def test_user_agent_data(ua_string: str, response_data: dict) -> None:
         assert data["is_pc"] is response_data["is_pc"]
         assert data["is_bot"] is response_data["is_bot"]
         assert data["is_email_client"] is response_data["is_email_client"]
+
+
+@pytest.mark.asyncio
+async def test_existing_scope_user_agent_is_preserved() -> None:
+    """Ensure pre-existing scope user agent is not overridden."""
+
+    sentinel = object()
+    captured = {}
+
+    async def app(scope, receive, send):
+        captured["ua"] = scope["ua"]
+
+    middleware = UAMiddleware(app)
+
+    scope = {"type": "http", "ua": sentinel}
+
+    async def receive():
+        return {"type": "http.request"}
+
+    async def send(message):  # pragma: no cover - not used but required by interface
+        captured["message"] = message
+
+    await middleware(scope, receive, send)
+
+    assert captured["ua"] is sentinel
