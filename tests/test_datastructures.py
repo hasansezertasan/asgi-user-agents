@@ -16,10 +16,9 @@ def make_scope(headers: Headers) -> dict:
 
 def test_missing_header_does_not_parse_user_agent(monkeypatch) -> None:
     """Ensure the ``UserAgent`` parser is not invoked when the header is absent."""
-
     calls: list[str] = []
 
-    class SpyUserAgent:  # noqa: D401 - simple spy for instantiation
+    class SpyUserAgent:
         def __init__(self, ua_string: str) -> None:
             calls.append(ua_string)
             self.ua_string = ua_string
@@ -36,7 +35,6 @@ def test_missing_header_does_not_parse_user_agent(monkeypatch) -> None:
 
 def test_user_agent_cached(monkeypatch) -> None:
     """The ``UserAgent`` parser should only run once and be cached."""
-
     calls: list[str] = []
 
     class SpyUserAgent:
