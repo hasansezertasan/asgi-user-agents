@@ -17,7 +17,7 @@ class UADetails:
     def __init__(self, scope: Scope) -> None:
         """Initialize the user-agent details object."""
         self._scope = scope
-        self._ua: UserAgent
+        self._ua: Optional[UserAgent] = None
 
     def _get_header(self, name: bytes) -> Optional[str]:
         """Get header value.
@@ -33,25 +33,26 @@ class UADetails:
 
     @property
     def _ua_string(self) -> Optional[str]:
-        """Extract user-agent string from the headers of the request and return it."""
-        return self._get_header(b"User-Agent") or ""
+        """Return the user-agent string from the request headers if available."""
+        return self._get_header(b"User-Agent")
 
     @property
     def ua(self) -> UserAgent:
         """Return the user-agent object."""
-        if not hasattr(self, "_ua"):
-            self._ua = UserAgent(self._ua_string)
+        if self._ua is None:
+            ua_string = self._ua_string or ""
+            self._ua = UserAgent(ua_string)
         return self._ua
 
     @property
     def ua_string(self) -> str:
         """Return the user-agent string."""
-        return self.ua.ua_string
+        return self._ua_string or ""
 
     @property
     def is_provided(self) -> bool:
         """Check if the user-agent string is provided."""
-        return bool(self.ua_string)
+        return bool(self._ua_string)
 
     @property
     def os(self) -> OperatingSystem:
