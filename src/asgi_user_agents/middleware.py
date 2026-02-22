@@ -14,6 +14,7 @@ class UAMiddleware:
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
         """Call the middleware."""
         if scope["type"] in ("http", "websocket"):
-            scope["ua"] = UADetails(scope)
+            if "ua" not in scope or not scope["ua"]:
+                scope["ua"] = UADetails(scope)
 
         await self._app(scope, receive, send)
