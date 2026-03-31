@@ -35,7 +35,7 @@ repos:
       - id: trailing-whitespace
         name: Trailing whitespace
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.37.0
+    rev: 0.37.1
     hooks:
       - id: check-github-actions
         name: Validate GitHub Actions
@@ -48,7 +48,7 @@ repos:
         additional_dependencies:
           - tomli
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.7
+    rev: v0.15.8
     hooks:
       - id: ruff
         name: Ruff Linter
