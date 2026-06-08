@@ -39,7 +39,11 @@ classifiers = [
   "Framework :: AsyncIO",
   "Framework :: FastAPI",
 ]
-dependencies = ["user-agents"]
+dependencies = ["user-agents", "typing_extensions>=4.0.0"]
+
+[project.optional-dependencies]
+litestar = ["litestar>=2.0.0,<3.0.0"]
+fastapi = ["fastapi>=0.110.0,<1.0.0"]
 
 
 [project.urls]
