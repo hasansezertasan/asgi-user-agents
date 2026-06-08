@@ -19,7 +19,6 @@ from asgi_user_agents.contrib.fastapi import (
     install_ua,
 )
 
-
 app = install_ua(FastAPI())
 
 
