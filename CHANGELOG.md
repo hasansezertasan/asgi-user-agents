@@ -10,30 +10,100 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 ## [0.3.0] - 2026-06-08
 
-### Added
+### What's Changed
 
-* ✨ Add `contrib` integrations for Litestar and FastAPI. by [@hasansezertasan](https://github.com/hasansezertasan) in [#109](https://github.com/hasansezertasan/asgi-user-agents/pull/109)
+* 🔧 Add codespell hook for spell checking and check-jsonschema for GitHub action validation by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/18
+* Bump codecov/codecov-action from 4.0.1 to 4.4.1 by @dependabot[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/21
+* Remove duplicate `__version__` tag alongside with `__all__` tag from `__init__.py` and implement relative imports. by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/19
+* Add `user-agent` keyword to PyPI configuration by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/20
+* Bump `ruff` from 0.4.5 to 0.4.7 by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/23
+* [pre-commit.ci] pre-commit autoupdate by @pre-commit-ci[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/22
+* Update `ruff` configuration: remove defaults and extend rules by `ALL`. by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/24
+* Configure Renovate by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/27
+* Bump codecov/codecov-action from 4.4.1 to 4.5.0 by @dependabot[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/26
+* Update codecov/codecov-action action to v4.6.0 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/28
+* ci(publishing): replacing the previous publish workflow with cd workflow, migrating to trusted host publishing by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/33
+* Update dependency codespell to v2.4.1 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/29
+* Update dependency fastapi to >=0.116.1, <0.117.0 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/31
+* chore(gitignore): use more generic gitignore by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/34
+* refactor(ASGITransport): pass application to AsyncClient through ASGITransport by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/35
+* Update dependency httpx to >=0.28.1, <0.29.0 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/32
+* deps(ruff): bump `ruff` from 0.4.5 to 0.12.5 by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/38
+* chore(dependabot): remove by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/39
+* feat(uv): project can be used with uv and cd.yml now uses uv to publish to pypi by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/42
+* feat(ci): add GitHub Actions workflow to lint pull request titles for Conventional Commits compliance by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/45
+* chore(pre-commit): update pr title format by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/46
+* chore(deps): update dependency ruff to v0.12.6 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/37
+* chore(deps): update codecov/codecov-action action to v5 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/41
+* chore(deps): update dependency ruff to v0.12.7 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/47
+* ci(codecov): migrate to v5 by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/48
+* chore(cd): rename environment to 'publish' and update artifact attachment step description by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/49
+* chore(docs): update docstrings for user-agent data retrieval in FastAPI, Litestar, Quart, and Starlette tests by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/50
+* chore(deps): update dependency ruff to v0.12.8 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/52
+* chore(deps): update dependency uvicorn to >=0.35.0,<0.36.0 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/40
+* chore(deps): update actions/checkout action to v5 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/53
+* chore(deps): update amannn/action-semantic-pull-request action to v6 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/54
+* chore(deps): update codecov/codecov-action action to v5.5.0 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/56
+* chore(deps): [pre-commit.ci] pre-commit autoupdate by @pre-commit-ci[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/51
+* chore(deps): update dependency ruff to v0.12.10 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/55
+* chore(deps): [pre-commit.ci] pre-commit autoupdate by @pre-commit-ci[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/57
+* chore(deps): update dependency ruff to v0.12.11 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/58
+* chore(deps): update python docker tag to v3.14 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/65
+* chore(deps): update actions/checkout action to v6 - autoclosed by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/67
+* chore(deps): update astral-sh/setup-uv action to v7 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/66
+* chore(deps): update actions/setup-python action to v6 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/60
+* chore(deps): update codecov/codecov-action action to v5.5.2 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/61
+* chore(deps): update dependency pre-commit to v4 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/44
+* chore(deps): [pre-commit.ci] pre-commit autoupdate by @pre-commit-ci[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/59
+* chore(deps): update dependency ruff to v0.15.2 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/62
+* chore(deps): update dependency fastapi to >=0.129.0,<0.130.0 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/64
+* chore(deps): update dependency uvicorn to >=0.41.0,<0.42.0 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/63
+* refactor: preserve pre-populated UA scope entries in middleware by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/68
+* refactor: avoid parsing missing user-agent headers by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/69
+* chore(deps): [pre-commit.ci] pre-commit autoupdate by @pre-commit-ci[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/71
+* chore(deps): update dependency uvicorn to >=0.42.0,<0.43.0 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/75
+* chore(deps): update marocchino/sticky-pull-request-comment action to v3 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/74
+* chore(deps): update dependency ruff to v0.15.6 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/72
+* chore(deps): update dependency fastapi to >=0.135.1,<0.136.0 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/70
+* chore(deps): update dependency codespell to v2.4.2 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/73
+* chore(deps): update dependency ruff to v0.15.7 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/77
+* chore(deps): update codecov/codecov-action action to v5.5.3 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/76
+* chore(deps): update dependency ruff to v0.15.8 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/81
+* chore(deps): update codecov/codecov-action action to v6 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/80
+* chore(deps): [pre-commit.ci] pre-commit autoupdate by @pre-commit-ci[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/78
+* chore(deps): [pre-commit.ci] pre-commit autoupdate by @pre-commit-ci[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/82
+* chore(deps): update dependency ruff to v0.15.10 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/83
+* chore(deps): update dependency uvicorn to >=0.44.0,<0.45.0 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/84
+* chore(deps): [pre-commit.ci] pre-commit autoupdate by @pre-commit-ci[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/85
+* chore(deps): [pre-commit.ci] pre-commit autoupdate by @pre-commit-ci[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/86
+* chore(deps): update dependency ruff to v0.15.11 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/89
+* chore(deps): update dependency fastapi to >=0.136.0,<0.137.0 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/87
+* chore(deps): [pre-commit.ci] pre-commit autoupdate by @pre-commit-ci[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/91
+* chore(deps): update dependency uvicorn to >=0.45.0,<0.46.0 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/92
+* chore(deps): update dependency pre-commit to >=4.6.0,<4.7.0 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/93
+* chore(deps): update astral-sh/setup-uv action to v8 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/88
+* chore(deps): update dependency ruff to v0.15.12 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/95
+* chore(deps): update dependency uvicorn to >=0.46.0,<0.47.0 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/94
+* chore(deps): [pre-commit.ci] pre-commit autoupdate by @pre-commit-ci[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/96
+* chore(deps): update dependency parametrize_from_file to v0.21.0 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/97
+* chore(deps): [pre-commit.ci] pre-commit autoupdate by @pre-commit-ci[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/98
+* chore(deps): update dependency ruff to v0.15.13 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/99
+* chore(deps): update dependency uvicorn to >=0.47.0,<0.48.0 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/100
+* chore(deps): update codecov/codecov-action action to v6.0.1 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/101
+* chore(deps): update dependency uvicorn to >=0.48.0,<0.49.0 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/103
+* chore(deps): update dependency ruff to v0.15.15 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/102
+* chore: drop Python 3.8/3.9 support, add 3.14 by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/110
+* feat: add contrib integrations for Litestar and FastAPI by @hasansezertasan in https://github.com/hasansezertasan/asgi-user-agents/pull/109
+* chore(deps): update dependency ruff to v0.15.16 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/106
+* chore(deps): update python docker tag to v3.14 by @renovate[bot] in https://github.com/hasansezertasan/asgi-user-agents/pull/111
 
-### Changed
+### New Contributors
 
-* 💥 Drop Python 3.8 and 3.9 support; add Python 3.14. by [@hasansezertasan](https://github.com/hasansezertasan) in [#110](https://github.com/hasansezertasan/asgi-user-agents/pull/110)
+* @dependabot[bot] made their first contribution in https://github.com/hasansezertasan/asgi-user-agents/pull/21
+* @pre-commit-ci[bot] made their first contribution in https://github.com/hasansezertasan/asgi-user-agents/pull/22
+* @renovate[bot] made their first contribution in https://github.com/hasansezertasan/asgi-user-agents/pull/27
 
-### Fixed
-
-* 🐛 Preserve pre-populated `ua` scope entries in `UAMiddleware`. by [@hasansezertasan](https://github.com/hasansezertasan) in [#68](https://github.com/hasansezertasan/asgi-user-agents/pull/68)
-* ♻️ Avoid parsing missing `user-agent` headers. by [@hasansezertasan](https://github.com/hasansezertasan) in [#69](https://github.com/hasansezertasan/asgi-user-agents/pull/69)
-* ♻️ Pass application to `AsyncClient` through `ASGITransport` in tests. by [@hasansezertasan](https://github.com/hasansezertasan) in [#35](https://github.com/hasansezertasan/asgi-user-agents/pull/35)
-
-### Internal
-
-* ✨ Adopt `uv` for project workflow and publish to PyPI via `uv` in `cd.yml`. by [@hasansezertasan](https://github.com/hasansezertasan) in [#42](https://github.com/hasansezertasan/asgi-user-agents/pull/42)
-* 🔧 Replace the previous publish workflow with `cd.yml` and migrate to PyPI Trusted Publishing. by [@hasansezertasan](https://github.com/hasansezertasan) in [#33](https://github.com/hasansezertasan/asgi-user-agents/pull/33)
-* ✨ Add GitHub Actions workflow to lint pull request titles for Conventional Commits compliance. by [@hasansezertasan](https://github.com/hasansezertasan) in [#45](https://github.com/hasansezertasan/asgi-user-agents/pull/45)
-* 🔧 Add Renovate configuration; remove Dependabot. by [@hasansezertasan](https://github.com/hasansezertasan) in [#27](https://github.com/hasansezertasan/asgi-user-agents/pull/27), [#39](https://github.com/hasansezertasan/asgi-user-agents/pull/39)
-* 🔧 Extend `ruff` rule set with `ALL` and remove defaults. by [@hasansezertasan](https://github.com/hasansezertasan) in [#24](https://github.com/hasansezertasan/asgi-user-agents/pull/24)
-* 🔧 Add `codespell` pre-commit hook and `check-jsonschema` for GitHub Action validation.
-* 📝 Update docstrings for user-agent data retrieval in FastAPI, Litestar, Quart, and Starlette tests. by [@hasansezertasan](https://github.com/hasansezertasan) in [#50](https://github.com/hasansezertasan/asgi-user-agents/pull/50)
-* ⬆️ Routine dependency, pre-commit, and GitHub Actions updates via Renovate and `pre-commit.ci`.
+**Full Changelog**: https://github.com/hasansezertasan/asgi-user-agents/compare/0.2.0...0.3.0
 
 ## [0.2.0] - 2024-05-26
 
