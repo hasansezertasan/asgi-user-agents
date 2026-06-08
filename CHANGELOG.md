@@ -8,6 +8,33 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 * Nothing yet.
 
+## [0.3.0] - 2026-06-08
+
+### Added
+
+* ✨ Add `contrib` integrations for Litestar and FastAPI. by [@hasansezertasan](https://github.com/hasansezertasan) in [#109](https://github.com/hasansezertasan/asgi-user-agents/pull/109)
+
+### Changed
+
+* 💥 Drop Python 3.8 and 3.9 support; add Python 3.14. by [@hasansezertasan](https://github.com/hasansezertasan) in [#110](https://github.com/hasansezertasan/asgi-user-agents/pull/110)
+
+### Fixed
+
+* 🐛 Preserve pre-populated `ua` scope entries in `UAMiddleware`. by [@hasansezertasan](https://github.com/hasansezertasan) in [#68](https://github.com/hasansezertasan/asgi-user-agents/pull/68)
+* ♻️ Avoid parsing missing `user-agent` headers. by [@hasansezertasan](https://github.com/hasansezertasan) in [#69](https://github.com/hasansezertasan/asgi-user-agents/pull/69)
+* ♻️ Pass application to `AsyncClient` through `ASGITransport` in tests. by [@hasansezertasan](https://github.com/hasansezertasan) in [#35](https://github.com/hasansezertasan/asgi-user-agents/pull/35)
+
+### Internal
+
+* ✨ Adopt `uv` for project workflow and publish to PyPI via `uv` in `cd.yml`. by [@hasansezertasan](https://github.com/hasansezertasan) in [#42](https://github.com/hasansezertasan/asgi-user-agents/pull/42)
+* 🔧 Replace the previous publish workflow with `cd.yml` and migrate to PyPI Trusted Publishing. by [@hasansezertasan](https://github.com/hasansezertasan) in [#33](https://github.com/hasansezertasan/asgi-user-agents/pull/33)
+* ✨ Add GitHub Actions workflow to lint pull request titles for Conventional Commits compliance. by [@hasansezertasan](https://github.com/hasansezertasan) in [#45](https://github.com/hasansezertasan/asgi-user-agents/pull/45)
+* 🔧 Add Renovate configuration; remove Dependabot. by [@hasansezertasan](https://github.com/hasansezertasan) in [#27](https://github.com/hasansezertasan/asgi-user-agents/pull/27), [#39](https://github.com/hasansezertasan/asgi-user-agents/pull/39)
+* 🔧 Extend `ruff` rule set with `ALL` and remove defaults. by [@hasansezertasan](https://github.com/hasansezertasan) in [#24](https://github.com/hasansezertasan/asgi-user-agents/pull/24)
+* 🔧 Add `codespell` pre-commit hook and `check-jsonschema` for GitHub Action validation.
+* 📝 Update docstrings for user-agent data retrieval in FastAPI, Litestar, Quart, and Starlette tests. by [@hasansezertasan](https://github.com/hasansezertasan) in [#50](https://github.com/hasansezertasan/asgi-user-agents/pull/50)
+* ⬆️ Routine dependency, pre-commit, and GitHub Actions updates via Renovate and `pre-commit.ci`.
+
 ## [0.2.0] - 2024-05-26
 
 ### Internal
@@ -45,5 +72,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 [semantic versioning]: https://semver.org
 
 <!-- Versions -->
-[unreleased]: https://github.com/hasansezertasan/chrome-version/compare/0.1.0...HEAD
-[0.1.0]: https://github.com/hasansezertasan/chrome-version/releases/tag/0.1.0
+[unreleased]: https://github.com/hasansezertasan/asgi-user-agents/compare/0.3.0...HEAD
+[0.3.0]: https://github.com/hasansezertasan/asgi-user-agents/compare/0.2.0...0.3.0
+[0.2.0]: https://github.com/hasansezertasan/asgi-user-agents/compare/0.1.0...0.2.0
+[0.1.0]: https://github.com/hasansezertasan/asgi-user-agents/releases/tag/0.1.0
