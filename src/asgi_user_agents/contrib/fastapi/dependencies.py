@@ -12,6 +12,9 @@ from asgi_user_agents.middleware import UAMiddleware
 def get_ua(request: Request) -> UADetails:
     """Return a `UADetails` instance for the current request.
 
+    If `UAMiddleware` has already attached a `UADetails` to `request.scope`,
+    that instance is returned to avoid re-parsing the header.
+
     Args:
         request: The Starlette/FastAPI request.
 
@@ -19,6 +22,9 @@ def get_ua(request: Request) -> UADetails:
         A `UADetails` wrapping the request scope.
 
     """
+    cached = request.scope.get("ua")
+    if isinstance(cached, UADetails):
+        return cached
     return UADetails(request.scope)
 
 

@@ -18,6 +18,9 @@ if TYPE_CHECKING:
 def provide_ua(request: Request) -> UADetails:
     """Provide a `UADetails` instance built from the current request scope.
 
+    If `UAMiddleware` has already attached a `UADetails` to `request.scope`,
+    that instance is returned to avoid re-parsing the header.
+
     Args:
         request: The Litestar request.
 
@@ -25,6 +28,9 @@ def provide_ua(request: Request) -> UADetails:
         A `UADetails` wrapping the request scope.
 
     """
+    cached = request.scope.get("ua")
+    if isinstance(cached, UADetails):
+        return cached
     return UADetails(request.scope)
 
 
@@ -54,6 +60,8 @@ class UAPlugin(InitPluginProtocol):
             The (mutated) app configuration.
 
         """
+        if app_config.dependencies is None:
+            app_config.dependencies = {}
         app_config.dependencies.setdefault(
             "ua", Provide(provide_ua, sync_to_thread=False)
         )

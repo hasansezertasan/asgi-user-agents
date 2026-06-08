@@ -8,6 +8,7 @@ import parametrize_from_file as pff
 import pytest
 from fastapi.applications import FastAPI
 from httpx import ASGITransport, AsyncClient
+from starlette.requests import Request as StarletteRequest
 from starlette.responses import JSONResponse, Response
 
 from asgi_user_agents import UADetails, UAMiddleware
@@ -76,3 +77,15 @@ def test_plain_dependency_functions_exist() -> None:
     """get_ua and get_user_agent must be importable and callable."""
     assert callable(get_ua)
     assert callable(get_user_agent)
+
+
+def test_get_ua_reuses_cached_instance_from_scope() -> None:
+    """If `scope['ua']` already holds a UADetails, get_ua reuses that instance."""
+    cached = UADetails({"type": "http", "headers": [(b"user-agent", b"cached/1.0")]})
+    scope: dict = {
+        "type": "http",
+        "headers": [(b"user-agent", b"different/2.0")],
+        "ua": cached,
+    }
+    request = StarletteRequest(scope)
+    assert get_ua(request) is cached

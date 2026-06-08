@@ -7,12 +7,12 @@ from typing import Any, Dict
 import parametrize_from_file as pff
 import pytest
 from httpx import ASGITransport, AsyncClient
-from litestar import Litestar, get
+from litestar import Litestar, Request, get
 from litestar.di import Provide
 from user_agents.parsers import UserAgent
 
 from asgi_user_agents import UADetails
-from asgi_user_agents.contrib.litestar import UAPlugin
+from asgi_user_agents.contrib.litestar import UAPlugin, provide_ua
 
 
 @get("/")
@@ -64,6 +64,21 @@ async def test_user_agent_data(ua_string: str, response_data: dict) -> None:
         assert data["is_bot"] is response_data["is_bot"]
         assert data["is_mobile"] is response_data["is_mobile"]
         assert data["raw_family"] == response_data["browser.family"]
+
+
+def test_provide_ua_reuses_cached_instance_from_scope() -> None:
+    """If `scope['ua']` already holds a UADetails, provide_ua reuses that instance."""
+    cached = UADetails({"type": "http", "headers": [(b"user-agent", b"cached/1.0")]})
+    scope: dict = {
+        "type": "http",
+        "headers": [(b"user-agent", b"different/2.0")],
+        "ua": cached,
+        "path": "/",
+        "method": "GET",
+        "query_string": b"",
+    }
+    request: Request = Request(scope)
+    assert provide_ua(request) is cached
 
 
 @pytest.mark.asyncio
