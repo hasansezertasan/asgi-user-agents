@@ -5,5 +5,5 @@ from contextlib import suppress
 from asgi_user_agents.datastructures import UADetails as UADetails
 from asgi_user_agents.middleware import UAMiddleware as UAMiddleware
 
-with suppress(ImportError):
+with suppress(ImportError):  # noqa: RUF067
     from asgi_user_agents.requests import UARequest as UARequest

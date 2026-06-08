@@ -2,19 +2,29 @@
 
 from __future__ import annotations
 
-from typing import List, Tuple
+from typing import TYPE_CHECKING, List, Tuple
 
 from asgi_user_agents.datastructures import UADetails
+
+if TYPE_CHECKING:
+    import pytest
 
 Headers = List[Tuple[bytes, bytes]]
 
 
 def make_scope(headers: Headers) -> dict:
-    """Create a minimal ASGI scope with the given headers."""
+    """Create a minimal ASGI scope with the given headers.
+
+    Returns:
+        A minimal ASGI scope with the given headers.
+
+    """
     return {"headers": headers}
 
 
-def test_missing_header_does_not_parse_user_agent(monkeypatch) -> None:
+def test_missing_header_does_not_parse_user_agent(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     """Ensure the ``UserAgent`` parser is not invoked when the header is absent."""
     calls: list[str] = []
 
@@ -28,12 +38,12 @@ def test_missing_header_does_not_parse_user_agent(monkeypatch) -> None:
     scope = make_scope([])
     details = UADetails(scope)
 
-    assert details.ua_string == ""
+    assert not details.ua_string
     assert details.is_provided is False
     assert calls == []
 
 
-def test_user_agent_cached(monkeypatch) -> None:
+def test_user_agent_cached(monkeypatch: pytest.MonkeyPatch) -> None:
     """The ``UserAgent`` parser should only run once and be cached."""
     calls: list[str] = []
 
