@@ -22,6 +22,9 @@
 - [Installation](#installation)
 - [How does it work?](#how-does-it-work)
 - [Usage](#usage)
+- [Framework integrations](#framework-integrations)
+  - [Litestar](#litestar)
+  - [FastAPI](#fastapi)
 - [API Reference](#api-reference)
   - [`UAMiddleware`](#uamiddleware)
   - [`UADetails`](#uadetails)
@@ -103,6 +106,59 @@ async def index(request: Request) -> Response:
     return JSONResponse(data)
 
 ```
+
+## Framework integrations
+
+For Litestar and FastAPI, optional `contrib` subpackages provide
+framework-idiomatic access. The core `UAMiddleware` still works for any
+ASGI framework — `contrib` is additive convenience.
+
+Install with the relevant extra:
+
+```bash
+pip install asgi-user-agents[litestar]
+pip install asgi-user-agents[fastapi]
+```
+
+### Litestar
+
+Use `UAPlugin` to inject `ua: UADetails` and `user_agent: UserAgent` into route handlers. No middleware needed.
+
+```python
+from litestar import Litestar, get
+
+from asgi_user_agents import UADetails
+from asgi_user_agents.contrib.litestar import UAPlugin
+
+
+@get("/")
+async def index(ua: UADetails) -> dict:
+    return {"is_bot": ua.is_bot, "browser": ua.browser.family}
+
+
+app = Litestar(route_handlers=[index], plugins=[UAPlugin()])
+```
+
+If you already registered a dependency named `ua` or `user_agent`, `UAPlugin` will not overwrite it.
+
+### FastAPI
+
+Use `install_ua(app)` plus the prebuilt `UADep` / `UserAgentDep` annotated dependencies.
+
+```python
+from fastapi import FastAPI
+
+from asgi_user_agents.contrib.fastapi import UADep, install_ua
+
+app = install_ua(FastAPI())
+
+
+@app.get("/")
+async def index(ua: UADep) -> dict:
+    return {"is_bot": ua.is_bot, "browser": ua.browser.family}
+```
+
+`install_ua` is idempotent. The plain dependency functions `get_ua` and `get_user_agent` are also exported if you prefer to wire them yourself.
 
 ## API Reference
 
