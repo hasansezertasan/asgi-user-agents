@@ -72,7 +72,7 @@ trusted-publishing = "always"
 installer = "uv"
 extra-dependencies = [
   "starlette>=0.16.0",
-  "uvicorn>=0.48.0,<0.49.0",
+  "uvicorn>=0.49.0,<0.50.0",
   "pre-commit>=4.6.0,<4.7.0",
 ]
 
