@@ -33,12 +33,12 @@ class UADetails:
 
     @property
     def _ua_string(self) -> Optional[str]:
-        """Return the user-agent string from the request headers if available."""
+        """The user-agent string from the request headers if available."""
         return self._get_header(b"User-Agent")
 
     @property
     def ua(self) -> UserAgent:
-        """Return the user-agent object."""
+        """The user-agent object."""
         if self._ua is None:
             ua_string = self._ua_string or ""
             self._ua = UserAgent(ua_string)
@@ -46,7 +46,7 @@ class UADetails:
 
     @property
     def ua_string(self) -> str:
-        """Return the user-agent string."""
+        """The user-agent string."""
         return self._ua_string or ""
 
     @property
@@ -56,17 +56,17 @@ class UADetails:
 
     @property
     def os(self) -> OperatingSystem:
-        """Return the operating system."""
+        """The operating system."""
         return self.ua.os
 
     @property
     def browser(self) -> Browser:
-        """Return the browser."""
+        """The browser."""
         return self.ua.browser
 
     @property
     def device(self) -> Device:
-        """Return the device."""
+        """The device."""
         return self.ua.device
 
     @property
