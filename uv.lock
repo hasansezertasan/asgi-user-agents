@@ -48,6 +48,7 @@ dependencies = [
 
 [package.optional-dependencies]
 django = [
+    { name = "asgiref" },
     { name = "django", version = "5.2.15", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "django", version = "6.0.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
 ]
@@ -60,6 +61,7 @@ litestar = [
 
 [package.metadata]
 requires-dist = [
+    { name = "asgiref", marker = "extra == 'django'", specifier = ">=3.6" },
     { name = "django", marker = "extra == 'django'", specifier = ">=3.2" },
     { name = "fastapi", marker = "extra == 'fastapi'", specifier = ">=0.110.0,<1.0.0" },
     { name = "litestar", marker = "extra == 'litestar'", specifier = ">=2.0.0,<3.0.0" },

@@ -43,7 +43,9 @@ dependencies = ["user-agents", "typing_extensions>=4.0.0"]
 [project.optional-dependencies]
 litestar = ["litestar>=2.0.0,<3.0.0"]
 fastapi = ["fastapi>=0.110.0,<1.0.0"]
-django = ["django>=3.2"]
+# asgiref>=3.6 is required for `markcoroutinefunction`/`iscoroutinefunction`
+# used by the middleware; Django 3.2/4.1 can otherwise resolve an older asgiref.
+django = ["django>=3.2", "asgiref>=3.6"]
 
 
 [project.urls]
