@@ -11,7 +11,7 @@
 [![Downloads/Month](https://pepy.tech/badge/asgi-user-agents/month)](https://pepy.tech/project/asgi-user-agents)
 [![Downloads/Week](https://pepy.tech/badge/asgi-user-agents/week)](https://pepy.tech/project/asgi-user-agents)
 
-[User Agents][python-user-agents] integration for [ASGI](https://asgi.readthedocs.io/en/latest/) applications. Works with Starlette, FastAPI, Quart, Litestar -- or any other web framework supporting ASGI that exposes the ASGI `scope`.
+[User Agents][python-user-agents] integration for [ASGI](https://asgi.readthedocs.io/en/latest/) applications. Works with Starlette, FastAPI, Quart, Litestar, Django -- or any other web framework supporting ASGI that exposes the ASGI `scope`.
 
 -----
 
@@ -109,7 +109,7 @@ async def index(request: Request) -> Response:
 
 ## Framework integrations
 
-For Litestar and FastAPI, optional `contrib` subpackages provide
+For Litestar, FastAPI, and Django, optional `contrib` subpackages provide
 framework-idiomatic access. The core `UAMiddleware` still works for any
 ASGI framework — `contrib` is additive convenience.
 
@@ -118,6 +118,7 @@ Install with the relevant extra:
 ```bash
 pip install asgi-user-agents[litestar]
 pip install asgi-user-agents[fastapi]
+pip install asgi-user-agents[django]
 ```
 
 ### Litestar
@@ -159,6 +160,45 @@ async def index(ua: UADep) -> dict:
 ```
 
 `install_ua` is idempotent. The plain dependency functions `get_ua` and `get_user_agent` are also exported if you prefer to wire them yourself.
+
+### Django
+
+Built on `UADetails`. Add the app and the middleware:
+
+```python
+# settings.py
+INSTALLED_APPS = [
+    # ...
+    "asgi_user_agents.contrib.django",  # enables the template filters
+]
+
+MIDDLEWARE = [
+    # ...
+    "asgi_user_agents.contrib.django.UserAgentMiddleware",
+]
+```
+
+The middleware attaches a lazy `request.user_agent` (a `UADetails`):
+
+```python
+def my_view(request):
+    if request.user_agent.is_mobile:
+        ...
+    browser = request.user_agent.browser.family
+```
+
+…and the same data is available as template filters:
+
+```django
+{% load asgi_user_agents %}
+{% if request|is_mobile %}Mobile{% elif request|is_pc %}Desktop{% endif %}
+```
+
+Resolution is **scope-first**: under ASGI, if the core `UAMiddleware` already
+ran, `request.user_agent` reuses the parsed `request.scope["ua"]` with no
+re-parse. Under WSGI (no scope) it falls back to parsing `request.headers`, so
+the integration works under both deployment models. The middleware is sync- and
+async-capable.
 
 ## API Reference
 
