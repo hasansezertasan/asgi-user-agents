@@ -86,6 +86,38 @@ def test_wsgi_request_falls_back_to_headers() -> None:
     assert ua.ua_string == "wsgi/5.0"
 
 
+def test_wsgi_request_with_missing_user_agent() -> None:
+    """A WSGIRequest with no User-Agent yields an empty, not-provided UADetails."""
+    request = rf.get("/")
+    ua = get_user_agent(request)
+    assert isinstance(ua, UADetails)
+    assert not ua.ua_string
+    assert ua.is_provided is False
+    assert ua.is_mobile is False
+    rendered = Template(
+        "{% load asgi_user_agents %}{{ request|is_mobile }}|{{ request|is_bot }}"
+    ).render(Context({"request": request}))
+    assert rendered == "False|False"
+
+
+def test_wsgi_fallback_handles_non_ascii_user_agent() -> None:
+    """The WSGI fallback never raises on non-latin-1 User-Agent characters.
+
+    A genuine WSGI server can only produce latin-1 header strings, but a
+    synthetic caller may inject anything. Latin-1 chars round-trip exactly;
+    out-of-range chars (e.g. an emoji) are dropped rather than raising.
+    """
+    # Accented chars are within latin-1 and round-trip losslessly.
+    accented = rf.get("/", HTTP_USER_AGENT="MyApp/1.0 (Áccented)")
+    assert get_user_agent(accented).ua_string == "MyApp/1.0 (Áccented)"
+
+    # An emoji is outside latin-1: resolution must degrade, not raise.
+    emoji = rf.get("/", HTTP_USER_AGENT="MyApp/1.0 (\U0001f40d)")
+    ua = get_user_agent(emoji)
+    assert isinstance(ua, UADetails)
+    assert ua.ua_string == "MyApp/1.0 ()"
+
+
 # --- Resolution correctness against the canonical fixture ------------------ #
 
 

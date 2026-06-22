@@ -21,11 +21,16 @@ def _synthetic_scope(request: HttpRequest) -> Scope:
     values are latin-1 encoded to match the ASGI byte convention that
     ``UADetails._get_header`` decodes against.
 
+    A genuine WSGI server latin-1-decodes header bytes, so ``ua_string`` is
+    always in range here. ``errors="ignore"`` is a safety net for synthetic
+    callers (e.g. ``RequestFactory``) that may inject out-of-range characters:
+    we drop them rather than raise inside middleware.
+
     Returns:
         A scope-shaped mapping carrying only the ``User-Agent`` header.
     """
     ua_string = request.headers.get("user-agent", "")
-    return {"headers": [(b"user-agent", ua_string.encode("latin-1"))]}
+    return {"headers": [(b"user-agent", ua_string.encode("latin-1", "ignore"))]}
 
 
 def get_user_agent(request: HttpRequest) -> UADetails:
