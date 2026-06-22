@@ -6,7 +6,9 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 ## [Unreleased]
 
-* Nothing yet.
+### Added
+
+* ✨ Add `contrib` integration for Django: a sync/async `UserAgentMiddleware` attaching a lazy `request.user_agent`, the `{% load asgi_user_agents %}` template filters (`is_mobile`, `is_pc`, `is_tablet`, `is_bot`, `is_touch_capable`), and a `[django]` extra. Reuses `scope["ua"]` under ASGI and falls back to header parsing under WSGI.
 
 ## [0.3.0] - 2026-06-08
 
