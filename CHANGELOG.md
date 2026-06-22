@@ -6,9 +6,22 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-06-22
+
 ### Added
 
-* ✨ Add `contrib` integration for Django: a sync/async `UserAgentMiddleware` attaching a lazy `request.user_agent`, the `{% load asgi_user_agents %}` template filters (`is_mobile`, `is_pc`, `is_tablet`, `is_bot`, `is_touch_capable`), and a `[django]` extra. Reuses `scope["ua"]` under ASGI and falls back to header parsing under WSGI.
+* ✨ Add `contrib` integration for Django: a sync/async `UserAgentMiddleware` attaching a lazy `request.user_agent`, the `{% load asgi_user_agents %}` template filters (`is_mobile`, `is_pc`, `is_tablet`, `is_bot`, `is_touch_capable`), and a `[django]` extra. Reuses `scope["ua"]` under ASGI and falls back to header parsing under WSGI. by [@hasansezertasan](https://github.com/hasansezertasan) in [#121](https://github.com/hasansezertasan/asgi-user-agents/pull/121)
+
+### Fixed
+
+* 🔒 Bump `starlette` to `1.3.1` to pull in an upstream security fix. by [@renovate\[bot\]](https://github.com/apps/renovate) in [#116](https://github.com/hasansezertasan/asgi-user-agents/pull/116)
+
+### Internal
+
+* 🔧 Harden CI workflows with pinned actions and refresh dev tooling. by [@hasansezertasan](https://github.com/hasansezertasan) in [#122](https://github.com/hasansezertasan/asgi-user-agents/pull/122)
+* 🔧 Report coverage to Codecov via tokenless XML upload. by [@hasansezertasan](https://github.com/hasansezertasan) in [#123](https://github.com/hasansezertasan/asgi-user-agents/pull/123)
+* 🔧 Enhance Renovate configuration. by [@hasansezertasan](https://github.com/hasansezertasan) in [#119](https://github.com/hasansezertasan/asgi-user-agents/pull/119)
+* 📝 Auto-generate collapsible table of contents with `md-toc`. by [@hasansezertasan](https://github.com/hasansezertasan) in [#124](https://github.com/hasansezertasan/asgi-user-agents/pull/124)
 
 ## [0.3.0] - 2026-06-08
 
@@ -79,7 +92,8 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 [semantic versioning]: https://semver.org
 
 <!-- Versions -->
-[unreleased]: https://github.com/hasansezertasan/asgi-user-agents/compare/0.3.0...HEAD
+[unreleased]: https://github.com/hasansezertasan/asgi-user-agents/compare/0.4.0...HEAD
+[0.4.0]: https://github.com/hasansezertasan/asgi-user-agents/compare/0.3.0...0.4.0
 [0.3.0]: https://github.com/hasansezertasan/asgi-user-agents/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/hasansezertasan/asgi-user-agents/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/hasansezertasan/asgi-user-agents/releases/tag/0.1.0
