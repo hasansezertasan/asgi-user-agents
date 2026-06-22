@@ -47,6 +47,12 @@ repos:
         name: Codespell Spell Checker
         additional_dependencies:
           - tomli
+  - repo: https://github.com/frnmst/md-toc
+    rev: 9.0.0
+    hooks:
+      - id: md-toc
+        name: Markdown Table of Contents
+        args: [-p, -s, "1", github, -l, "6"]
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.15.18
     hooks:

@@ -15,9 +15,10 @@
 
 -----
 
-## Table of Contents
+<details>
+<summary>Table of Contents</summary>
 
-<!-- toc -->
+<!--TOC-->
 
 - [Installation](#installation)
 - [How does it work?](#how-does-it-work)
@@ -25,6 +26,7 @@
 - [Framework integrations](#framework-integrations)
   - [Litestar](#litestar)
   - [FastAPI](#fastapi)
+  - [Django](#django)
 - [API Reference](#api-reference)
   - [`UAMiddleware`](#uamiddleware)
   - [`UADetails`](#uadetails)
@@ -41,7 +43,9 @@
 - [Analysis](#analysis)
 - [License](#license)
 
-<!-- tocstop -->
+<!--TOC-->
+
+</details>
 
 ## Installation
 
