@@ -108,7 +108,7 @@ extra-dependencies = [
   "parametrize_from_file==0.21.0",
   "httpx>=0.28.1,<0.29.0",
   "starlette>=0.16.0",
-  "fastapi>=0.138.0,<0.139.0",
+  "fastapi>=0.139.0,<0.140.0",
   "litestar>=2.0.0,<3.0.0",
   "quart>=0.10.0,<0.20.0",
   "django>=3.2",
