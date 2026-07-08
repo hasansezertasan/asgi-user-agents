@@ -1,32 +1,27 @@
-"""Test usage of the middleware in Litestar."""
+"""Test usage of the middleware in Quart."""
 
-from __future__ import annotations
-
-from typing import Any, Dict
+from typing import cast
 
 import parametrize_from_file as pff
 import pytest
 from httpx import ASGITransport, AsyncClient
-from litestar import Litestar, get
+from quart import Quart, jsonify, request
 
-from asgi_user_agents import UADetails, UAMiddleware
-from asgi_user_agents import UARequest as Request
+from asgi_user_agents import UADetails
+
+app = Quart(__name__)
 
 
-@get("/")
-async def index(request: Request) -> Dict[str, Any]:
+@app.route("/")
+async def home() -> str:
     """Return user-agent data.
-
-    Args:
-        request: The request object.
 
     Returns:
         The response object.
 
     """
-    ua = request.scope["ua"]
-    assert isinstance(ua, UADetails)
-    return {
+    ua = UADetails(cast("dict", request.scope))
+    data = {
         "ua_string": ua.ua_string,
         "os": ua.os,
         "os.family": ua.os.family,
@@ -48,13 +43,11 @@ async def index(request: Request) -> Dict[str, Any]:
         "is_bot": ua.is_bot,
         "is_email_client": ua.is_email_client,
     }
-
-
-app = Litestar(route_handlers=[index], middleware=[UAMiddleware])
+    return jsonify(data)
 
 
 @pytest.mark.asyncio
-@pff.parametrize(path="assets/test_middleware.json")
+@pff.parametrize(path="../assets/test_middleware.json")
 async def test_user_agent_data(ua_string: str, response_data: dict) -> None:
     """Test user-agent data."""
     async with AsyncClient(

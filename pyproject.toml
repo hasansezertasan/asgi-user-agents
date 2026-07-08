@@ -164,7 +164,7 @@ known-first-party = ["asgi_user_agents"]
 
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*.py" = ['S101']
+"tests/**/*.py" = ['S101']
 
 
 [tool.ruff.lint.pyupgrade]

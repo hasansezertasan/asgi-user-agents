@@ -121,7 +121,7 @@ def test_wsgi_fallback_handles_non_ascii_user_agent() -> None:
 # --- Resolution correctness against the canonical fixture ------------------ #
 
 
-@pff.parametrize(path="assets/test_middleware.json", key="test_user_agent_data")
+@pff.parametrize(path="../assets/test_middleware.json", key="test_user_agent_data")
 def test_resolution_matches_fixture(ua_string: str, response_data: dict) -> None:
     """The WSGI fallback path produces fixture-accurate UADetails fields."""
     request = rf.get("/", HTTP_USER_AGENT=ua_string)
@@ -167,7 +167,7 @@ async def test_async_middleware_attaches_lazy_user_agent() -> None:
 # --- Template filters ------------------------------------------------------ #
 
 
-@pff.parametrize(path="assets/test_middleware.json", key="test_user_agent_data")
+@pff.parametrize(path="../assets/test_middleware.json", key="test_user_agent_data")
 def test_template_filters_match_fixture(ua_string: str, response_data: dict) -> None:
     """`{% load asgi_user_agents %}` filters mirror the UADetails booleans."""
     template = Template(

@@ -1,20 +1,20 @@
-"""Test usage of the middleware in FastAPI."""
+"""Test usage of the middleware in Litestar."""
+
+from __future__ import annotations
+
+from typing import Any, Dict
 
 import parametrize_from_file as pff
 import pytest
-from fastapi.applications import FastAPI
 from httpx import ASGITransport, AsyncClient
-from starlette.middleware import Middleware
-from starlette.responses import JSONResponse, Response
+from litestar import Litestar, get
 
 from asgi_user_agents import UADetails, UAMiddleware
 from asgi_user_agents import UARequest as Request
 
-app = FastAPI(middleware=[Middleware(UAMiddleware)])
 
-
-@app.get("/")
-async def index(request: Request) -> Response:
+@get("/")
+async def index(request: Request) -> Dict[str, Any]:
     """Return user-agent data.
 
     Args:
@@ -26,7 +26,7 @@ async def index(request: Request) -> Response:
     """
     ua = request.scope["ua"]
     assert isinstance(ua, UADetails)
-    data = {
+    return {
         "ua_string": ua.ua_string,
         "os": ua.os,
         "os.family": ua.os.family,
@@ -48,11 +48,13 @@ async def index(request: Request) -> Response:
         "is_bot": ua.is_bot,
         "is_email_client": ua.is_email_client,
     }
-    return JSONResponse(data)
+
+
+app = Litestar(route_handlers=[index], middleware=[UAMiddleware])
 
 
 @pytest.mark.asyncio
-@pff.parametrize(path="assets/test_middleware.json")
+@pff.parametrize(path="../assets/test_middleware.json")
 async def test_user_agent_data(ua_string: str, response_data: dict) -> None:
     """Test user-agent data."""
     async with AsyncClient(
