@@ -1,26 +1,31 @@
-"""Test usage of the middleware in Quart."""
-
-from typing import cast
+"""Test usage of the middleware in FastAPI."""
 
 import parametrize_from_file as pff
 import pytest
+from fastapi.applications import FastAPI
 from httpx import ASGITransport, AsyncClient
-from quart import Quart, jsonify, request
+from starlette.middleware import Middleware
+from starlette.responses import JSONResponse, Response
 
-from asgi_user_agents import UADetails
+from asgi_user_agents import UADetails, UAMiddleware
+from asgi_user_agents import UARequest as Request
 
-app = Quart(__name__)
+app = FastAPI(middleware=[Middleware(UAMiddleware)])
 
 
-@app.route("/")
-async def home() -> str:
+@app.get("/")
+async def index(request: Request) -> Response:
     """Return user-agent data.
+
+    Args:
+        request: The request object.
 
     Returns:
         The response object.
 
     """
-    ua = UADetails(cast("dict", request.scope))
+    ua = request.scope["ua"]
+    assert isinstance(ua, UADetails)
     data = {
         "ua_string": ua.ua_string,
         "os": ua.os,
@@ -43,11 +48,11 @@ async def home() -> str:
         "is_bot": ua.is_bot,
         "is_email_client": ua.is_email_client,
     }
-    return jsonify(data)
+    return JSONResponse(data)
 
 
 @pytest.mark.asyncio
-@pff.parametrize(path="assets/test_middleware.json")
+@pff.parametrize(path="../assets/test_middleware.json")
 async def test_user_agent_data(ua_string: str, response_data: dict) -> None:
     """Test user-agent data."""
     async with AsyncClient(

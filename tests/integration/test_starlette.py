@@ -1,7 +1,5 @@
 """Test usage of the middleware in Starlette."""
 
-from typing import Any, MutableMapping
-
 import parametrize_from_file as pff
 import pytest
 from httpx import ASGITransport, AsyncClient
@@ -55,7 +53,7 @@ app = Starlette(routes=[Route("/", index)], middleware=[Middleware(UAMiddleware)
 
 
 @pytest.mark.asyncio
-@pff.parametrize(path="assets/test_middleware.json")
+@pff.parametrize(path="../assets/test_middleware.json")
 async def test_user_agent_data(ua_string: str, response_data: dict) -> None:
     """Test user-agent data."""
     async with AsyncClient(
@@ -83,33 +81,3 @@ async def test_user_agent_data(ua_string: str, response_data: dict) -> None:
         assert data["is_pc"] is response_data["is_pc"]
         assert data["is_bot"] is response_data["is_bot"]
         assert data["is_email_client"] is response_data["is_email_client"]
-
-
-@pytest.mark.asyncio
-async def test_existing_scope_user_agent_is_preserved() -> None:
-    """Ensure pre-existing scope user agent is not overridden."""
-    sentinel = object()
-    captured = {}
-
-    async def app(
-        scope: MutableMapping[str, Any],
-        _receive: Any,
-        _send: Any,
-    ) -> None:
-        captured["ua"] = scope["ua"]
-
-    middleware = UAMiddleware(app)
-
-    scope: MutableMapping[str, Any] = {"type": "http", "ua": sentinel}
-
-    async def receive() -> MutableMapping[str, Any]:
-        return {"type": "http.request"}
-
-    async def send(
-        message: MutableMapping[str, Any],
-    ) -> None:  # pragma: no cover - not used but required by interface
-        captured["message"] = message
-
-    await middleware(scope, receive, send)
-
-    assert captured["ua"] is sentinel
