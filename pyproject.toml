@@ -110,7 +110,7 @@ extra-dependencies = [
   "starlette>=0.16.0",
   "fastapi>=0.141.1,<0.142.0",
   "litestar>=2.0.0,<3.0.0",
-  "quart>=0.10.0,<0.20.0",
+  "quart>=0.22.0,<0.23.0",
   "django>=3.2",
 ]
 
